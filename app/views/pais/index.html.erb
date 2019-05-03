@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Nome</th>
+      <th>Codigo</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
     <% @pais.each do |pai| %>
       <tr>
         <td><%= pai.nome %></td>
+        <td><%= pai.codigo %></td>
         <td><%= link_to 'Show', pai %></td>
         <td><%= link_to 'Edit', edit_pai_path(pai) %></td>
         <td><%= link_to 'Destroy', pai, method: :delete, data: { confirm: 'Are you sure?' } %></td>

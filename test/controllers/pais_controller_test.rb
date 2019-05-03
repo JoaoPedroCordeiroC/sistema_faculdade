@@ -17,7 +17,7 @@ class PaisControllerTest < ActionDispatch::IntegrationTest
 
   test "should create pai" do
     assert_difference('Pai.count') do
-      post pais_url, params: { pai: { nome: @pai.nome } }
+      post pais_url, params: { pai: { codigo: @pai.codigo, nome: @pai.nome } }
     end
 
     assert_redirected_to pai_url(Pai.last)
@@ -34,7 +34,7 @@ class PaisControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update pai" do
-    patch pai_url(@pai), params: { pai: { nome: @pai.nome } }
+    patch pai_url(@pai), params: { pai: { codigo: @pai.codigo, nome: @pai.nome } }
     assert_redirected_to pai_url(@pai)
   end
 

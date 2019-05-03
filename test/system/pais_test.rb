@@ -14,6 +14,7 @@ class PaisTest < ApplicationSystemTestCase
     visit pais_url
     click_on "New Pai"
 
+    fill_in "Codigo", with: @pai.codigo
     fill_in "Nome", with: @pai.nome
     click_on "Create Pai"
 
@@ -25,6 +26,7 @@ class PaisTest < ApplicationSystemTestCase
     visit pais_url
     click_on "Edit", match: :first
 
+    fill_in "Codigo", with: @pai.codigo
     fill_in "Nome", with: @pai.nome
     click_on "Update Pai"
 

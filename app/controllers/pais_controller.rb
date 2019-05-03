@@ -69,6 +69,6 @@ class PaisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pai_params
-      params.require(:pai).permit(:nome)
+      params.require(:pai).permit(:nome, :codigo)
     end
 end
