@@ -10,9 +10,88 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2019_05_03_011306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "alunos", force: :cascade do |t|
+    t.string "nome"
+    t.string "documento"
+    t.string "telefone"
+    t.string "email"
+    t.string "pai"
+    t.string "mae"
+    t.bigint "endereco_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["endereco_id"], name: "index_alunos_on_endereco_id"
+  end
+
+  create_table "anos", force: :cascade do |t|
+    t.integer "ano"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cidades", force: :cascade do |t|
+    t.string "nome"
+    t.bigint "estado_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["estado_id"], name: "index_cidades_on_estado_id"
+  end
+
+  create_table "enderecos", force: :cascade do |t|
+    t.string "rua"
+    t.string "bairro"
+    t.string "numero"
+    t.string "cep"
+    t.bigint "cidade_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cidade_id"], name: "index_enderecos_on_cidade_id"
+  end
+
+  create_table "estados", force: :cascade do |t|
+    t.string "nome"
+    t.string "uf"
+    t.bigint "pais_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pais_id"], name: "index_estados_on_pais_id"
+  end
+
+  create_table "pais", force: :cascade do |t|
+    t.string "nome"
+    t.string "codigo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "professors", force: :cascade do |t|
+    t.string "nome"
+    t.string "documento"
+    t.string "telefone"
+    t.string "email"
+    t.bigint "endereco_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["endereco_id"], name: "index_professors_on_endereco_id"
+  end
+
+  create_table "semestres", force: :cascade do |t|
+    t.string "nome"
+    t.bigint "ano_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ano_id"], name: "index_semestres_on_ano_id"
+  end
+
+  add_foreign_key "alunos", "enderecos"
+  add_foreign_key "cidades", "estados"
+  add_foreign_key "enderecos", "cidades"
+  add_foreign_key "estados", "pais", column: "pais_id"
+  add_foreign_key "professors", "enderecos"
+  add_foreign_key "semestres", "anos"
 end
